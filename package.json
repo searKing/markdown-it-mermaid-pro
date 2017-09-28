@@ -1,0 +1,41 @@
+{
+  "name": "markdown-it-mermaid",
+  "version": "0.0.0",
+  "description": "&lt;svg> tag plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser. Generation of diagrams, flowcharts, gants and sequences from text.",
+  "keywords": [
+    "markdown-it-plugin",
+    "markdown-it",
+    "markdown",
+    "diagrams",
+    "flowcharts",
+    "gants",
+    "sequences",
+    "svg"
+  ],
+  "homepage": "https://github.com/searKing/markdown-it-mermaid",
+  "repository": {
+    "type": "https",
+    "url": "https://github.com/searKing/markdown-it-mermaid.git"
+  },
+  "bugs": {
+    "url": "https://github.com/searKing/markdown-it-mermaid/issues"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "devDependencies": {
+    "browserify": "*",
+    "coveralls": "^3.0.0",
+    "eslint": "^4.7.2",
+    "eslint-plugin-nodeca": "^1.0.0",
+    "istanbul": "*",
+    "lodash": "*",
+    "markdown-it": "markdown-it/markdown-it",
+    "markdown-it-testgen": "~0.1.0",
+    "mocha": "*",
+    "request": "*",
+    "uglify-js": "*"
+  }
+}
