@@ -1,5 +1,5 @@
 {
-  "name": "markdown-it-mermaid",
+  "name": "markdown-it-mermaid-pro",
   "version": "0.0.0",
   "description": "&lt;svg> tag plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser. Generation of diagrams, flowcharts, gants and sequences from text.",
   "keywords": [
@@ -12,13 +12,13 @@
     "sequences",
     "svg"
   ],
-  "homepage": "https://github.com/searKing/markdown-it-mermaid",
+  "homepage": "https://github.com/searKing/markdown-it-mermaid-pro",
   "repository": {
     "type": "https",
-    "url": "https://github.com/searKing/markdown-it-mermaid.git"
+    "url": "https://github.com/searKing/markdown-it-mermaid-pro.git"
   },
   "bugs": {
-    "url": "https://github.com/searKing/markdown-it-mermaid/issues"
+    "url": "https://github.com/searKing/markdown-it-mermaid-pro/issues"
   },
   "license": "MIT",
   "main": "index.js",

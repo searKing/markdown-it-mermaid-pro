@@ -1,8 +1,8 @@
-# markdown-it-mermaid
+# markdown-it-mermaid-pro
 
-[![Build Status](https://img.shields.io/travis/searKing/markdown-it-mermaid/master.svg?style=flat)](https://travis-ci.org/searKing/markdown-it-mermaid)
-[![NPM version](https://img.shields.io/npm/v/markdown-it-mermaid.svg?style=flat)](https://www.npmjs.org/package/markdown-it-mermaid)
-[![Coverage Status](https://img.shields.io/coveralls/searKing/markdown-it-mermaid/master.svg?style=flat)](https://coveralls.io/r/searKing/markdown-it-mermaid?branch=master)
+[![Build Status](https://img.shields.io/travis/searKing/markdown-it-mermaid-pro/master.svg?style=flat)](https://travis-ci.org/searKing/markdown-it-mermaid-pro)
+[![NPM version](https://img.shields.io/npm/v/markdown-it-mermaid-pro.svg?style=flat)](https://www.npmjs.org/package/markdown-it-mermaid-pro)
+[![Coverage Status](https://img.shields.io/coveralls/searKing/markdown-it-mermaid-pro/master.svg?style=flat)](https://coveralls.io/r/searKing/markdown-it-mermaid-pro?branch=master)
 
 &lt;svg> tag plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser. Generation of diagrams, flowcharts, gants and sequences from text.
 
@@ -18,15 +18,15 @@ Markup uses the same conditions as CommonMark [emphasis](http://spec.commonmark.
 node.js, browser:
 
 ```bash
-npm install markdown-it-mermaid --save
-bower install markdown-it-mermaid --save
+npm install markdown-it-mermaid-pro --save
+bower install markdown-it-mermaid-pro --save
 ```
 
 ## Use
 
 ```js
 var md = require('markdown-it')()
-            .use(require('markdown-it-mermaid'));
+            .use(require('markdown-it-mermaid-pro'));
 
 md.render('
 graph TD
@@ -45,5 +45,5 @@ package system, module will add itself globally as `window.markdownitMermaid`.
 
 ## License
 
-[MIT](https://github.com/searKing/markdown-it-mermaid/blob/master/LICENSE)
+[MIT](https://github.com/searKing/markdown-it-mermaid-pro/blob/master/LICENSE)
 
