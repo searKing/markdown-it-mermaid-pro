@@ -1,41 +1,71 @@
 {
   "name": "markdown-it-mermaid-pro",
-  "version": "0.0.0",
-  "description": "&lt;svg> tag plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser. Generation of diagrams, flowcharts, gants and sequences from text.",
-  "keywords": [
-    "markdown-it-plugin",
-    "markdown-it",
-    "markdown",
-    "diagrams",
-    "flowcharts",
-    "gants",
-    "sequences",
-    "svg"
-  ],
-  "homepage": "https://github.com/searKing/markdown-it-mermaid-pro",
-  "repository": {
-    "type": "https",
-    "url": "https://github.com/searKing/markdown-it-mermaid-pro.git"
-  },
-  "bugs": {
-    "url": "https://github.com/searKing/markdown-it-mermaid-pro/issues"
-  },
+  "version": "0.0.1",
+  "description": "<svg> tag plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser. Generation of diagrams, flowcharts, gants and sequences from text.",
   "license": "MIT",
-  "main": "index.js",
+  "repository": "https://github.com/searKing/markdown-it-mermaid-pro",
+  "bugs": "https://github.com/searKing/markdown-it-mermaid-pro/issues",
+  "homepage": "https://github.com/searKing/markdown-it-mermaid-pro/blob/master/README.md",
+  "author": {
+    "name": "Haixin Chen",
+    "email": "471030698@qq.com",
+    "url": "https://github.com/searKing"
+  },
+  "keywords": [
+    "markdown",
+    "html",
+    "markdown-it"
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
-    "test": "make test"
+    "clean": "rimraf lib && rimraf coverage",
+    "format": "prettier --write \"{src,__tests__}/**/*.ts\" --single-quote --trailing-comma es5",
+    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+    "prepublish": "npm run build",
+    "prebuild": "npm run clean && npm run format && npm run lint && echo Using TypeScript && tsc --version",
+    "build": "tsc --pretty",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "watch": "npm run build -- --watch",
+    "watch:test": "jest --watch"
+  },
+  "dependencies": {
+    "markdown-it": "^8.4.0",
+    "markdown-it-container": "^2.0.0",
+    "mermaid": "^7.1.0",
+    "puppeteer": "^0.11.0"
   },
   "devDependencies": {
-    "browserify": "*",
-    "coveralls": "^3.0.0",
-    "eslint": "^4.7.2",
-    "eslint-plugin-nodeca": "^1.0.0",
-    "istanbul": "*",
-    "lodash": "*",
-    "markdown-it": "markdown-it/markdown-it",
-    "markdown-it-testgen": "~0.1.0",
-    "mocha": "*",
-    "request": "*",
-    "uglify-js": "*"
+    "@types/jest": "^20.0.5",
+    "@types/lodash": "^4.14.74",
+    "@types/node": "^8.0.0",
+    "coveralls": "^2.0.0",
+    "jest": "^20.0.4",
+    "jest-environment-node-debug": "^2.0.0",
+    "prettier": "^1.5.2",
+    "rimraf": "^2.0.0",
+    "ts-jest": "^20.0.7",
+    "ts-node": "^3.2.0",
+    "tslint": "^5.0.0",
+    "tslint-config-prettier": "^1.1.0",
+    "typescript": "^2.3.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "jest": {
+    "transform": {
+      ".(ts)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testEnvironment": "node"
   }
 }
