@@ -51,7 +51,7 @@ markdowItMermaidBeginPro.mermaid2html(taskList);
     contentMaps: renderMaps,
   };
   const markdowItMermaidEndPro = new MarkdowItMermaidPro(renderEndoptions);
-  //   console.log('rendered= ', markdowItMermaidEndPro.mermaid2html(taskList));
+  console.log('rendered= ', markdowItMermaidEndPro.mermaid2html(taskList));
   markdowItMermaidEndPro.mermaid2html(taskList);
-  // expect(markdowItMermaidEndPro.mermaid2html(taskList)).toBe(taskListExpect);
+  //   expect(markdowItMermaidEndPro.mermaid2html(taskList)).toBe(taskListExpect);
 })();
