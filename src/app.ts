@@ -1,4 +1,5 @@
 import { MarkdowItMermaidPro } from './markdown-it-mermaid';
+
 const taskList: string = `
 \`\`\`sequence
 graph TD;
@@ -27,17 +28,17 @@ const markdowItMermaidBeginPro = new MarkdowItMermaidPro(renderBeginoptions);
 markdowItMermaidBeginPro.mermaid2html(taskList);
 (async function handle() {
   const renderMaps: string[] = [];
-  console.log('renderPromises= ', renderPromises);
+  //   console.log('renderPromises= ', renderPromises);
   if (!renderPromises) {
     return;
   }
   for (const key in renderPromises) {
     if (renderPromises.hasOwnProperty(key)) {
-      console.log('key = ', key);
+      //   console.log('key = ', key);
       const p = renderPromises[key];
-      console.log('p = ', p);
+      //   console.log('p = ', p);
       const text: string = await p;
-      console.log('text= ', text);
+      //   console.log('text= ', text);
       if (!text) {
         continue;
       }
@@ -50,7 +51,7 @@ markdowItMermaidBeginPro.mermaid2html(taskList);
     contentMaps: renderMaps,
   };
   const markdowItMermaidEndPro = new MarkdowItMermaidPro(renderEndoptions);
-  console.log('rendered= ', markdowItMermaidEndPro.mermaid2html(taskList));
+  //   console.log('rendered= ', markdowItMermaidEndPro.mermaid2html(taskList));
   markdowItMermaidEndPro.mermaid2html(taskList);
   // expect(markdowItMermaidEndPro.mermaid2html(taskList)).toBe(taskListExpect);
 })();

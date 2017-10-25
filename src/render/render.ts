@@ -70,8 +70,8 @@ export class MermaidRender implements IMermaidRender {
         if (tokens[idx].nesting === 1) {
           const mermaidContent = this.getContentFromTokens(tokens);
           let mermaidHtml = mermaidContent;
-          console.log('mermaidContent', mermaidContent);
-          console.log('this.contentMaps', this.contentMaps);
+          // console.log('mermaidContent', mermaidContent);
+          // console.log('this.contentMaps', this.contentMaps);
           if (!!this.contentMaps && this.contentMaps.length > 0) {
             mermaidHtml = this.contentMaps.shift() || '';
           } else {
@@ -103,11 +103,11 @@ export class MermaidRender implements IMermaidRender {
     return mermaidContent;
   }
   private async mermaidToHtml(mermaidContent: string): Promise<string> {
-    console.log('mermaidContent = ' + mermaidContent);
+    // console.log('mermaidContent = ' + mermaidContent);
     const svgCode: string = await this.mermaidToHtmlAPI(mermaidContent, {
-      verbose: true,
+      verbose: false,
     });
-    console.log('svgCode = ' + svgCode);
+    // console.log('svgCode = ' + svgCode);
     return Promise.resolve(svgCode);
   }
   private async mermaidToHtmlAPI(
@@ -119,14 +119,12 @@ export class MermaidRender implements IMermaidRender {
     // 使用Puppeteer，相当于同时具有Linux和Chrome的能力，应用场景会非常多。就爬虫领域来说，远比一般的爬虫工具功能更丰富，性能分析、自动化测试也不在话下，今天先探讨爬虫相关
     const puppeteer = require('puppeteer');
 
-    const svg: string = 'HTHT';
-
     // 运行puppeteer，他会return一个promise，使用then方法获取browser实例
     const browser = await puppeteer.launch({ headless: true });
-    await puppeteer
+    const svg: string = await puppeteer
       .launch({ headless: true })
       .then(async (browserInstance: any) => {
-        console.log('puppeteer launched ');
+        // console.log('puppeteer launched ');
         const page = await browserInstance.newPage();
 
         // await page.goto("http://jackhiston.com/");
@@ -289,11 +287,11 @@ export class MermaidRender implements IMermaidRender {
           ganttConfig: null,
           sequenceConfig: null,
         });
+        await browserInstance.close();
         // console.log('svgContent = ' + svgContent);
-        browserInstance.close();
         return svgContent;
       });
-    console.log('svg = ' + svg);
+    // console.log('svg = ' + svg);
     return svg;
   }
 }
