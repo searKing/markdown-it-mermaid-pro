@@ -29,7 +29,7 @@ http://www.npmjs.com. If you see a markdown parsing bug there,
 
 # README
 
-An extension to preview Markdown, ReStructured Text, HTML, Jade, Pug or Mermaid files, Image's URI or CSS while editing them in VSCode
+\<svg\> tag plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser. Generation of diagrams, flowcharts, gants and sequences from text.
 
 # Installation
 
@@ -45,23 +45,44 @@ Here is a quick example of how this module can be used in other modules. The [Ty
 
 Now assuming you have published this amazing module to _npm_ with the name `markdown2html-pro`, and installed it in the module in which you need it -
 
-- To use the `Markdown2HtmlPro` class in a TypeScript file -
+- To use the `mermaid2html` function in a TypeScript file -
 
 ```ts
-import { Markdown2HtmlPro } from "markdown2html-pro";
-const markdownContent = "";
-const markdown2htmlPro = new Markdown2HtmlPro();
-markdown2htmlPro.markdown2html(markdownContent);
+import { mermaid2html } from "markdown2html-pro";
+const taskList: string = `
+  \`\`\`sequence
+  graph TD;
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;
+  \`\`\`
+  `;
+
+(async(){
+  const html: string = await mermaid2html(taskList);
+  console.log("rendered html is\n:", html);
+})()
 ```
 
-- To use the `Markdown2HtmlPro` class in a JavaScript file -
+- To use the `mermaid2html` function in a JavaScript file -
 
 ```js
-const Markdown2HtmlPro = require('markdown2html-pro').Markdown2HtmlPro;
-const markdownContent = "";
+const mermaid2html = require('markdown2html-pro').mermaid2html;
+const taskList: string = `
+  \`\`\`sequence
+  graph TD;
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;
+  \`\`\`
+  `;
+(async(){
+  const html: string = await mermaid2html(taskList);
+  console.log("rendered html is\n:", html);
+})()
 
-const markdown2htmlPro = new Markdown2HtmlPro();
-markdown2htmlPro.markdown2html(markdownContent);
 ```
 
 ## Setting travis and coveralls badges
@@ -76,8 +97,8 @@ markdown2html-pro exports a single function. For basic use, that function
 takes a single argument: a string to convert.
 
 ```js
-var marky = require("markdown2html-pro")
-var html = marky("# hello, I'm markdown")
+const mermaid2html = require("markdown2html-pro")
+const html : Promise<sring> = mermaid2html("# hello, I'm markdown")
 ```
 
 ## Tests
