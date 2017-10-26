@@ -68,8 +68,9 @@ const taskList: string = `
 - To use the `mermaid2html` function in a JavaScript file -
 
 ```js
-const mermaid2html = require('markdown2html-pro').mermaid2html;
-const taskList: string = `
+const markdownItMermaidPro = require("markdown-it-mermaid-pro")
+const mermaid2html = markdownItMermaidPro.mermaid2html;
+const taskList = `
   \`\`\`sequence
   graph TD;
   A-->B;
@@ -78,8 +79,8 @@ const taskList: string = `
   C-->D;
   \`\`\`
   `;
-(async(){
-  const html: string = await mermaid2html(taskList);
+(async()=>{
+  const html = await mermaid2html(taskList);
   console.log("rendered html is\n:", html);
 })()
 
