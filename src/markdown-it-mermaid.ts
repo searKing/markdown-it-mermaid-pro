@@ -39,7 +39,7 @@ export class MarkdowItMermaidPro implements IMarkdownItMermaidPro {
     this.options = options;
     return this;
   }
-  
+
   public mermaid2html(markdown: string): string {
     let html: string = '';
 
