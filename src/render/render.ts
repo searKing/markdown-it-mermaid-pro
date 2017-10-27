@@ -34,7 +34,7 @@ export class MermaidRender implements IMermaidRender {
   public constructor(options?: IMermaidRenderOptions) {
     const fileUrl = require('file-url');
     // console.log('__dirname = ', __dirname);
-    const defaultRootWebPath = path.join(__dirname, '..', '..');
+    const defaultRootWebPath = path.join(__dirname, '..', '..', '..', '..');
     this.options = options || {};
     this.renderer = this.options.renderer;
     this.rootWebPath = this.options.rootWebPath || defaultRootWebPath;
@@ -145,6 +145,7 @@ export class MermaidRender implements IMermaidRender {
         '</html>',
       ].join('\n')
     );
+    // console.log('rootWebPath= ', this.rootWebPath);
 
     const sourcePath = path.join(
       this.rootWebPath,

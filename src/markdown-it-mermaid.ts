@@ -7,13 +7,13 @@ import {
 import { IDefaultOptions } from './utils/configuration';
 import './utils/json';
 import { Log } from './utils/log';
-export function mermaid_plugin(md: any) {
+export function mermaid_plugin(md: any, rootWebDir: string | undefined) {
   const options: IDefaultOptions = {
     cb: undefined,
     contentMaps: undefined,
     debug: false,
     renderer: md,
-    rootWebPath: undefined,
+    rootWebPath: rootWebDir,
   };
   const markdowItMermaidPro = new MarkdowItMermaidPro(options);
 }
@@ -55,7 +55,10 @@ export class MarkdowItMermaidPro implements IMarkdownItMermaidPro {
       contentMaps: this.options.contentMaps,
       debug: this.options.debug,
       renderer: this.options.renderer,
+      rootWebPath: this.options.rootWebPath,
     };
+    // console.log('rootWebPath= ', markdownRenderOptions.rootWebPath);
+
     const render: IMermaidRender = new MermaidRender(markdownRenderOptions);
     html = render.renderToHtml(markdown);
 
