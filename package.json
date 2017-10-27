@@ -34,9 +34,11 @@
     "watch:test": "jest --watch"
   },
   "dependencies": {
+    "file-url": "^2.0.2",
     "markdown-it": "^8.4.0",
     "markdown-it-container": "^2.0.0",
     "mermaid": "^7.1.0",
+    "path": "^0.12.7",
     "puppeteer": "^0.11.0"
   },
   "devDependencies": {

@@ -7,4 +7,5 @@ export interface IDefaultOptions {
   contentMaps?: string[];
   debug?: boolean;
   renderer?: any;
+  rootWebPath?: string;
 }

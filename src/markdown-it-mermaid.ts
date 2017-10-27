@@ -13,6 +13,7 @@ export function mermaid_plugin(md: any) {
     contentMaps: undefined,
     debug: false,
     renderer: md,
+    rootWebPath: undefined,
   };
   const markdowItMermaidPro = new MarkdowItMermaidPro(options);
 }
@@ -28,6 +29,7 @@ export class MarkdowItMermaidPro implements IMarkdownItMermaidPro {
     contentMaps: undefined,
     debug: false,
     renderer: require('markdown-it')(),
+    rootWebPath: undefined,
   };
 
   constructor(options?: IDefaultOptions) {

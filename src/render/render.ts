@@ -1,4 +1,6 @@
 'use strict';
+import * as path from 'path';
+
 export interface IMermaidRender {
   renderToHtml(mdContent: string): string;
 }
@@ -8,6 +10,7 @@ export interface IMermaidRenderOptions {
   contentMaps?: string[];
   debug?: boolean;
   renderer?: any;
+  rootWebPath?: string;
 }
 interface IPuppeteerOptions {
   cb?: any;
@@ -26,10 +29,16 @@ export class MermaidRender implements IMermaidRender {
   private contentMaps: string[];
   private promises: Array<Promise<string>>;
   private renderer: any;
+  private rootWebPath: string;
   private options: IMermaidRenderOptions;
   public constructor(options?: IMermaidRenderOptions) {
+    const fileUrl = require('file-url');
+    // console.log('__dirname = ', __dirname);
+    const defaultRootWebPath = path.join(__dirname, '..', '..');
     this.options = options || {};
     this.renderer = this.options.renderer;
+    this.rootWebPath = this.options.rootWebPath || defaultRootWebPath;
+    // console.log('rootWebPath = ', this.rootWebPath);
     this.cb = this.options.cb;
     this.contentMaps = this.options.contentMaps || [];
     this.promises = [];
@@ -136,8 +145,15 @@ export class MermaidRender implements IMermaidRender {
         '</html>',
       ].join('\n')
     );
+
+    const sourcePath = path.join(
+      this.rootWebPath,
+      'node_modules/mermaid/dist/mermaid.js'
+    );
+
+    // console.log('sourcePath = ', sourcePath);
     // // 加载Mermaid脚本
-    await page.injectFile('node_modules/mermaid/dist/mermaid.js');
+    await page.injectFile(sourcePath);
     // //  注册日志打印函数
     page.on('console', (...args: any[]) => {
       if (options.verbose) {
