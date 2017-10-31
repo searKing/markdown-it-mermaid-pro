@@ -1,6 +1,8 @@
 import * as path from 'path';
 
-import { mermaid_pro_plugin } from './markdown-it-mermaid-pro';
+import { IMermaid2htmlProOptions, mermaid2html } from './markdown-it-mermaid-pro';
+
+
 
 const taskList: string = `
 \`\`\`sequence
@@ -11,12 +13,16 @@ B-->D;
 C-->D;
 \`\`\`
 `;
+
 (async (md: string) => {
   const defaultRootWebPath = path.join(__dirname, '..');
   // console.log('defaultRootWebPath= ', defaultRootWebPath);
-
-  const html: string = await mermaid_pro_plugin(md, defaultRootWebPath);
+  const options: IMermaid2htmlProOptions = {
+    rootWebPath: defaultRootWebPath
+  };
+  const html: string = await mermaid2html(md, options);
   console.log('renderedhtml= ', html);
 
   return;
 })(taskList);
+

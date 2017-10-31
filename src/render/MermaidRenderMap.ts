@@ -1,17 +1,14 @@
 'use strict';
+import { defaults } from 'lodash';
 import * as path from 'path';
+import { IMermaidBaseOptions, MermaidBase } from './MermaidBase'
+
 
 export interface IMermaidRender {
-  renderToHtml(mdContent: string): string;
+  getRenderHtml(mdContent: string): string;
+  registerThisPlugin(): void;
 }
 
-export interface IMermaidRenderOptions {
-  cb?: any;
-  contentMaps?: string[];
-  debug?: boolean;
-  renderer?: any;
-  rootWebPath?: string;
-}
 interface IPuppeteerOptions {
   cb?: any;
   contents?: string;
@@ -22,96 +19,66 @@ interface IPuppeteerOptions {
   sequenceConfig?: any;
   confWidth?: number;
 }
-// import {MarkdownIt } from "markdown-it";
-// let taskLists = require('markdown-it-task-lists');
-export class MermaidRender implements IMermaidRender {
-  private cb: any;
-  private contentMaps: string[];
+export interface IMermaidRenderMapOptions {
+  debug?: boolean;
+  renderer?: any;
+  rootWebPath?: string;
+}
+export class MermaidRenderMap extends MermaidBase {
   private promises: Array<Promise<string>>;
-  private renderer: any;
+  private renderMap: Promise<string[]>;
   private rootWebPath: string;
-  private options: IMermaidRenderOptions;
-  public constructor(options?: IMermaidRenderOptions) {
-    const fileUrl = require('file-url');
-    // console.log('__dirname = ', __dirname);
-    const defaultRootWebPath = path.join(__dirname, '..', '..', '..', '..');
-    this.options = options || {};
-    this.renderer = this.options.renderer;
-    this.rootWebPath = this.options.rootWebPath || defaultRootWebPath;
-    // console.log('rootWebPath = ', this.rootWebPath);
-    this.cb = this.options.cb;
-    this.contentMaps = this.options.contentMaps || [];
+  public constructor(options?: IMermaidRenderMapOptions) {
+    const defaultOptions: IMermaidRenderMapOptions = {
+      debug: false,
+      renderer: require('markdown-it'),
+      rootWebPath: path.join(__dirname, '..', '..', '..', '..')
+    }
+    options = options || {}
+    defaults(options, defaultOptions);
+
+    super({
+      debug: options.debug,
+      renderer: options.renderer
+    });
+
+    this.rootWebPath = options.rootWebPath || '';
     this.promises = [];
     return this;
   }
-  public renderToHtml(mdContent: string): string {
-    this.loadModules();
+  public async getRenderMap(mdContent: string): Promise<string[]> {
     const renderer = this.getRenderer();
+    this.loadModules(renderer);
 
-    const str = renderer.render(mdContent);
-    if (!!this.cb) {
-      this.cb(this.promises);
+    const str = renderer.render(mdContent);// refresh promises
+    const renderMaps: string[] = [];
+    if (!this.promises) {
+      return renderMaps;
     }
-    return str;
-  }
-  private loadModules() {
-    this.container_what(this.getRenderer(), 'sequence');
-    this.container_what(this.getRenderer(), 'Mermaid');
-  }
-  private getRenderer(): any {
-    return this.renderer;
-  }
-
-  // ```tag
-  // ```
-  private container_what(md: any, tag: string): any {
-    // ^${tag}\s+(.*)$
-    const re = new RegExp('^' + tag + '\\s*$');
-
-    // const re = new RegExp("^" + tag + "\\s+(.*)$");
-    return md.use(require('markdown-it-container'), tag, {
-      marker: '`',
-      render: (tokens: any, idx: number, options: any, env: any, self: any) => {
-        // console.log('tokens[' + idx + '] = ' + tokens[idx].info);
-        // console.log('tokens = ' + JSON.stringify(tokens) );
-        // const m = tokens[idx].info.trim().match(re);
-
-        if (tokens[idx].nesting === 1) {
-          const mermaidContent = this.getContentFromTokens(tokens);
-          let mermaidHtml = mermaidContent;
-          // console.log('mermaidContent', mermaidContent);
-          // console.log('this.contentMaps', this.contentMaps);
-          if (!!this.contentMaps && this.contentMaps.length > 0) {
-            mermaidHtml = this.contentMaps.shift() || '';
-            // console.log('mermaidHtml = ', mermaidHtml);
-          } else {
-            const mermaidHtmlPromise = this.mermaidToHtml(mermaidContent);
-            this.promises.push(mermaidHtmlPromise);
-          }
-          // opening tag
-          return `${mermaidHtml}` + '<!--';
-        } else {
-          // closing tag
-          return '-->';
+    for (const key in this.promises) {
+      if (this.promises.hasOwnProperty(key)) {
+        //   console.log('key = ', key);
+        const p = this.promises[key];
+        //   console.log('p = ', p);
+        const text: string = await p;
+        //   console.log('text= ', text);
+        if (!text) {
+          continue;
         }
-      },
-      validate: (params: any) => {
-        return params.trim().match(re);
-      },
-    });
-  }
 
-  private getContentFromTokens(tokens: any) {
-    let mermaidContent = '';
-    for (const token of tokens) {
-      if (token.type === 'inline') {
-        mermaidContent = token.content;
-        break;
+        renderMaps.push(text);
       }
     }
-
+    return renderMaps;
+  }
+  // process every mermaid paragraph, adn store every promise
+  public handleMermaid(mermaidContent: string): string {
+    const mermaidHtmlPromise = this.mermaidToHtml(mermaidContent);
+    this.promises.push(mermaidHtmlPromise);
     return mermaidContent;
   }
+
+
   private async mermaidToHtml(mermaidContent: string): Promise<string> {
     // console.log('mermaidContent = ' + mermaidContent);
     const svgCode: string = await this.mermaidToHtmlAPI(mermaidContent, {
