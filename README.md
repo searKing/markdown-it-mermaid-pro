@@ -59,10 +59,18 @@ const taskList: string = `
   \`\`\`
   `;
 
-(async(){
-  const html: string = await mermaid2html(taskList);
+(async (md: string) => {
+  const defaultRootWebPath = path.join(__dirname, '..');
+  // console.log('defaultRootWebPath= ', defaultRootWebPath);
+  const options: index.IMermaid2htmlProOptions = {
+    rootWebPath: defaultRootWebPath,
+  };
+
+  const html: string = await index.mermaid2html(md, options);
   console.log("rendered html is\n:", html);
-})()
+
+  return;
+})(taskList);
 ```
 
 - To use the `mermaid2html` function in a JavaScript file -
@@ -79,10 +87,13 @@ const taskList = `
   C-->D;
   \`\`\`
   `;
-(async()=>{
-  const html = await mermaid2html(taskList);
+(async(md)=>{
+  const options = {
+    rootWebPath: defaultRootWebPath,
+  };
+  const html = await mermaid2html(md, options);
   console.log("rendered html is\n:", html);
-})()
+})(taskList)
 
 ```
 
