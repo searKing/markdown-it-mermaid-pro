@@ -2,7 +2,6 @@ import * as index from '../src/index';
 
 import * as path from 'path';
 
-
 test('Should have mermaid2html available', () => {
   expect(index.mermaid2html).toBeTruthy();
 });
