@@ -1,11 +1,12 @@
 import * as path from 'path';
 
-import { IMermaid2htmlProOptions, mermaid2html } from './markdown-it-mermaid-pro';
-
-
+import {
+  IMermaid2htmlProOptions,
+  mermaid2html,
+} from './markdown-it-mermaid-pro';
 
 const taskList: string = `
-\`\`\`sequence
+\`\`\`mermaid
 graph TD;
 A-->B;
 A-->C;
@@ -18,11 +19,10 @@ C-->D;
   const defaultRootWebPath = path.join(__dirname, '..');
   // console.log('defaultRootWebPath= ', defaultRootWebPath);
   const options: IMermaid2htmlProOptions = {
-    rootWebPath: defaultRootWebPath
+    rootWebPath: defaultRootWebPath,
   };
-  const html: string = await mermaid2html(md, options);
-  console.log('renderedhtml= ', html);
 
+  const html: string = await mermaid2html(md, options);
+  console.log('html = ', html);
   return;
 })(taskList);
-

@@ -1,8 +1,7 @@
 'use strict';
 import { defaults } from 'lodash';
 import * as path from 'path';
-import { IMermaidBaseOptions, MermaidBase } from './MermaidBase'
-
+import { IMermaidBaseOptions, MermaidBase } from './MermaidBase';
 
 export interface IMermaidRender {
   getRenderHtml(mdContent: string): string;
@@ -31,15 +30,15 @@ export class MermaidRenderMap extends MermaidBase {
   public constructor(options?: IMermaidRenderMapOptions) {
     const defaultOptions: IMermaidRenderMapOptions = {
       debug: false,
-      renderer: require('markdown-it'),
-      rootWebPath: path.join(__dirname, '..', '..', '..', '..')
-    }
-    options = options || {}
+      renderer: require('markdown-it')(),
+      rootWebPath: path.join(__dirname, '..', '..', '..', '..'),
+    };
+    options = options || {};
     defaults(options, defaultOptions);
 
     super({
       debug: options.debug,
-      renderer: options.renderer
+      renderer: options.renderer,
     });
 
     this.rootWebPath = options.rootWebPath || '';
@@ -50,7 +49,7 @@ export class MermaidRenderMap extends MermaidBase {
     const renderer = this.getRenderer();
     this.loadModules(renderer);
 
-    const str = renderer.render(mdContent);// refresh promises
+    const str = renderer.render(mdContent); // refresh promises
     const renderMaps: string[] = [];
     if (!this.promises) {
       return renderMaps;
@@ -77,7 +76,6 @@ export class MermaidRenderMap extends MermaidBase {
     this.promises.push(mermaidHtmlPromise);
     return mermaidContent;
   }
-
 
   private async mermaidToHtml(mermaidContent: string): Promise<string> {
     // console.log('mermaidContent = ' + mermaidContent);
