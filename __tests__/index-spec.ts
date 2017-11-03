@@ -1,4 +1,4 @@
-import * as index from '../src/index';
+import index = require('../src/index');
 
 import * as path from 'path';
 
@@ -382,7 +382,7 @@ C--&gt;D;</p>
 (async (md: string) => {
   const defaultRootWebPath = path.join(__dirname, '..');
   // console.log('defaultRootWebPath= ', defaultRootWebPath);
-  const options: index.IMermaid2htmlProOptions = {
+  const options = {
     rootWebPath: defaultRootWebPath,
   };
 
