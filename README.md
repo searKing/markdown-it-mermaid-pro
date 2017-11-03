@@ -48,7 +48,7 @@ Now assuming you have published this amazing module to _npm_ with the name `mark
 - To use the `mermaid2html` function in a TypeScript file -
 
 ```ts
-import { mermaid2html } from "markdown2html-pro";
+import markdownItMermaidPro = require('markdown-it-mermaid-pro');
 const taskList: string = `
   \`\`\`sequence
   graph TD;
@@ -66,7 +66,7 @@ const taskList: string = `
     rootWebPath: defaultRootWebPath,
   };
 
-  const html: string = await index.mermaid2html(md, options);
+  const html: string = await markdownItMermaidPro.mermaid2html(md, options);
   console.log("rendered html is\n:", html);
 
   return;
@@ -94,8 +94,82 @@ const taskList = `
   const html = await mermaid2html(md, options);
   console.log("rendered html is\n:", html);
 })(taskList)
-
 ```
+
+- To use the `mermaid2html` function in a TypeScript file as a markdown-it plugin-
+
+```ts
+import markdownItMermaidPro = require('markdown-it-mermaid-pro');
+const taskList: string = `
+  \`\`\`sequence
+  graph TD;
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;
+  \`\`\`
+  `;
+(async (markdownContent: string) => {
+  let html: string = '';
+
+  if (typeof markdownContent !== 'string') {
+    throw Error('first argument must be a string');
+  }
+  const defaultRootWebPath = path.join(__dirname, '..');
+
+  const cms: string[] = await markdownItMermaidPro.mermaid_pro_plugin_init_everytime(
+    markdownContent,
+    defaultRootWebPath
+  );
+  const md = require('markdown-it')();
+  const ro = {
+    contentMaps: cms,
+  };
+  md.use(markdownItMermaidPro, ro);
+
+  html = md.render(markdownContent);
+  console.log('html = ', html);
+  return html;
+})(taskList);
+```
+
+- To use the `mermaid2html` function in a JavaScript file as a markdown-it plugin-
+
+```ts
+const markdownItMermaidPro = require("markdown-it-mermaid-pro")
+const taskList: string = `
+  \`\`\`sequence
+  graph TD;
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;
+  \`\`\`
+  `;
+(async (markdownContent: string) => {
+  let html: string = '';
+
+  if (typeof markdownContent !== 'string') {
+    throw Error('first argument must be a string');
+  }
+  const defaultRootWebPath = path.join(__dirname, '..');
+
+  const cms: string[] = await markdownItMermaidPro.mermaid_pro_plugin_init_everytime(
+    markdownContent,
+    defaultRootWebPath
+  );
+  const md = require('markdown-it')();
+  const ro = {
+    contentMaps: cms,
+  };
+  md.use(markdownItMermaidPro, ro);
+
+  html = md.render(markdownContent);
+  console.log('html = ', html);
+  return html;
+})(taskList);
+```
+
 
 ## Setting travis and coveralls badges
 1. Sign in to [travis](https://travis-ci.org/) and activate the build for your project.
