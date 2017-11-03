@@ -50,14 +50,14 @@ Now assuming you have published this amazing module to _npm_ with the name `mark
 ```ts
 import markdownItMermaidPro = require('markdown-it-mermaid-pro');
 const taskList: string = `
-  \`\`\`sequence
-  graph TD;
-  A-->B;
-  A-->C;
-  B-->D;
-  C-->D;
-  \`\`\`
-  `;
+\`\`\`mermaid
+graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;
+\`\`\`
+`;
 
 (async (md: string) => {
   const defaultRootWebPath = path.join(__dirname, '..');
@@ -79,14 +79,14 @@ const taskList: string = `
 const markdownItMermaidPro = require("markdown-it-mermaid-pro")
 const mermaid2html = markdownItMermaidPro.mermaid2html;
 const taskList = `
-  \`\`\`sequence
-  graph TD;
-  A-->B;
-  A-->C;
-  B-->D;
-  C-->D;
-  \`\`\`
-  `;
+\`\`\`mermaid
+graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;
+\`\`\`
+`;
 (async(md)=>{
   const options = {
     rootWebPath: defaultRootWebPath,
@@ -101,14 +101,14 @@ const taskList = `
 ```ts
 import markdownItMermaidPro = require('markdown-it-mermaid-pro');
 const taskList: string = `
-  \`\`\`sequence
-  graph TD;
-  A-->B;
-  A-->C;
-  B-->D;
-  C-->D;
-  \`\`\`
-  `;
+\`\`\`mermaid
+graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;
+\`\`\`
+`;
 (async (markdownContent: string) => {
   let html: string = '';
 
@@ -135,17 +135,17 @@ const taskList: string = `
 
 - To use the `mermaid2html` function in a JavaScript file as a markdown-it plugin-
 
-```ts
+```js
 const markdownItMermaidPro = require("markdown-it-mermaid-pro")
-const taskList: string = `
-  \`\`\`sequence
-  graph TD;
-  A-->B;
-  A-->C;
-  B-->D;
-  C-->D;
-  \`\`\`
-  `;
+const taskList = `
+\`\`\`mermaid
+graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;
+\`\`\`
+`;
 (async (markdownContent: string) => {
   let html: string = '';
 

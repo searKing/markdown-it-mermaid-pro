@@ -6,7 +6,7 @@ test('Should have mermaid2html available', () => {
   expect(index.mermaid2html).toBeTruthy();
 });
 const taskList: string = `
-\`\`\`sequence
+\`\`\`mermaid
 graph TD;
 A-->B;
 A-->C;
