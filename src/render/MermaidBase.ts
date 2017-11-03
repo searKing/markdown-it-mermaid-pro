@@ -35,7 +35,7 @@ export class MermaidBase {
   // ```
   private container_what(md: any, tag: string): any {
     // ^${tag}\s+(.*)$
-    const re = new RegExp('^' + tag + '\\s*$');
+    const re = new RegExp('^\\s*' + tag + '\\s*$', 'i');
 
     // const re = new RegExp("^" + tag + "\\s+(.*)$");
     return md.use(require('markdown-it-container'), tag, {
