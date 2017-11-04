@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-mermaid-pro",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "<svg> tag plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser. Generation of diagrams, flowcharts, gants and sequences from text.",
   "license": "MIT",
   "repository": "https://github.com/searKing/markdown-it-mermaid-pro",
