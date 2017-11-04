@@ -35,7 +35,7 @@ export class MermaidBase {
   // ```
   private container_what(md: any, tag: string): any {
     // ^${tag}\s+(.*)$
-    const re = new RegExp('^\\s*' + tag + '\\s*$', 'i');
+    const re = new RegExp('^' + tag + '(.*)$', 'i');
 
     // const re = new RegExp("^" + tag + "\\s+(.*)$");
     return md.use(require('markdown-it-container'), tag, {
@@ -46,7 +46,7 @@ export class MermaidBase {
         // const m = tokens[idx].info.trim().match(re);
 
         if (tokens[idx].nesting === 1) {
-          const mermaidContent = this.getContentFromTokens(tokens);
+          const mermaidContent = this.getContentFromTokens(tokens, idx);
           // console.log('mermaidContent = ', mermaidContent);
 
           const mermaidHtml = this.handleMermaid(mermaidContent);
@@ -63,9 +63,11 @@ export class MermaidBase {
     });
   }
 
-  private getContentFromTokens(tokens: any) {
+  private getContentFromTokens(tokens: any, startIdx: number) {
     let mermaidContent = '';
-    for (const token of tokens) {
+
+    for (let index = startIdx; index < tokens.length; index++) {
+      const token = tokens[index];
       if (token.type === 'inline') {
         mermaidContent = token.content;
         break;
