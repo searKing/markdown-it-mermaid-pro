@@ -25,7 +25,6 @@ export interface IMermaidRenderMapOptions {
 }
 export class MermaidRenderMap extends MermaidBase {
   private promises: Array<Promise<string>>;
-  private renderMap: Promise<string[]>;
   private rootWebPath: string;
   public constructor(options?: IMermaidRenderMapOptions) {
     const defaultOptions: IMermaidRenderMapOptions = {
@@ -119,7 +118,8 @@ export class MermaidRenderMap extends MermaidBase {
 
     // console.log('sourcePath = ', sourcePath);
     // // 加载Mermaid脚本
-    await page.injectFile(sourcePath);
+    await page.addScriptTag({ path: sourcePath });
+
     // //  注册日志打印函数
     page.on('console', (...args: any[]) => {
       if (options.verbose) {
