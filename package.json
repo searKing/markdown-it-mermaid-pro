@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-mermaid-pro",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "<svg> tag plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser. Generation of diagrams, flowcharts, gants and sequences from text.",
   "license": "MIT",
   "repository": "https://github.com/searKing/markdown-it-mermaid-pro",
@@ -45,13 +45,13 @@
   "devDependencies": {
     "@types/jest": "^25.1.2",
     "@types/lodash": "^4.14.74",
-    "@types/node": "^13.7.1",
+    "@types/node": "^13.7.2",
     "coveralls": "^3.0.9",
     "jest": "^25.1.0",
     "jest-environment-node-debug": "^2.0.0",
     "prettier": "^1.5.2",
     "rimraf": "^3.0.2",
-    "ts-jest": "^25.2.0",
+    "ts-jest": "^25.2.1",
     "ts-node": "^8.6.2",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.1.0",
